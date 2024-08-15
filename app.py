@@ -32,6 +32,16 @@ def eliminar(usuario_id):
         return jsonify({"mensaje": "USUARIO ELIMINADO: " + {usuarios.get(str("usuario_id"))}})
     else:
         return jsonify({"mensaje": "Usuario no encontrado"})
+    
+@app.route('/yeilis', methods=['GET'])
+def yeilis():
+    print('un mensaje de validación previa a la respuesta')
+    return jsonify({"respuesta":"Yeilis te amo"})
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
-    
+
+
