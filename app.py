@@ -9,12 +9,22 @@ CORS(app)
 def home():
     return jsonify({"message": "Bienvenido a la API"})
 
-# Ruta para obtener un usuario por ID
-@app.route('/usuario/<int:usuario_id>', methods=['GET'])
-def get_usuario(usuario_id):
-    usuarios = {1: "Juan", 2: "Ana", 3: "Pedro", 4: "Leoces"}
-    usuario = usuarios.get(usuario_id, "No encontrado")
-    return jsonify({"usuario_id": usuario_id, "nombre": usuario})
+@app.route('/verTareas', methods=['GET'])
+def verTarea():
+    return jsonify({"respuesta":"Consulta de tareas desde el backend"})
+
+@app.route('/crearTarea', methods=['OPTIONS', 'POST'])
+def crearTarea():
+    if request.method == 'OPTIONS':
+        return '', 200  # Respuesta de éxito para la solicitud preflight
+    
+    # Maneja el POST como antes
+    data = request.get_json()
+    tarea_id = data.get('tarea_id')
+    tareas = {1: "Estudiar angular", 2: "Estudiar Hexagonal", 3: "Estudiar Spring Boot", 4: "Estudiar Metodologías"}
+    tarea = tareas.get(tarea_id, "No encontrado")
+    
+    return jsonify({"tarea_id": tarea_id, "nombre": tarea})
 
 # Ruta para crear un nuevo usuario
 @app.route('/usuario', methods=['POST'])
@@ -33,9 +43,7 @@ def eliminar(usuario_id):
     else:
         return jsonify({"mensaje": "Usuario no encontrado"})
     
-@app.route('/yeilis', methods=['GET'])
-def yeilis():
-    return jsonify({"respuesta":"Yeilis te amo"})
+
 
 
 
